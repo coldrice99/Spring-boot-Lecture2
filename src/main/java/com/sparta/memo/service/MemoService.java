@@ -4,16 +4,34 @@ import com.sparta.memo.dto.MemoRequestDto;
 import com.sparta.memo.dto.MemoResponseDto;
 import com.sparta.memo.entity.Memo;
 import com.sparta.memo.repository.MemoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-public class MemoService {
-
+@Service // @Component 포함
+//@Component // bean 객체로 등록
+//@RequiredArgsConstructor // 롬복 주입 방법
+public class MemoService { // memoService 라는 이름으로 bean 등록
     private final MemoRepository memoRepository;
 
+//    // 필드 주입 방법
+//    @Autowired // 스프링에서 private 임에도 불구하고 외부에서 메모레포지토리 빈 객체 주입 가능
+//    private MemoRepository memoRepository;
+
+    // 메서드로 주입하는 방법
+//    @Autowired
+//    public void setDi(MemoRepository memoRepository) {
+//        this.memoRepository = memoRepository;
+//    }
+
+    // 생성자 주입 방법. 객체의 불변성을 지켜줄 수 있음으로 가장 추천하는 방법
+//    @Autowired 생성자 1개일 때는 생략 가능
     public MemoService(MemoRepository memoRepository) {
         this.memoRepository = memoRepository;
-        }
+    }
 
     public MemoResponseDto createMemo(MemoRequestDto requestDto) {
         // RequestDto -> Entity
