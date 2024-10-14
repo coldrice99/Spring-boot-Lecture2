@@ -27,6 +27,12 @@ public class MemoController {
         return memoService.getMemos();
     }
 
+    // 2주차 숙제 API  1. controller -> service -> repository
+    @GetMapping("/memos/contents")
+    public List <MemoResponseDto> getMemosByKeyword(@RequestParam String keyword) {
+        return memoService.getMemosByKeyword(keyword);
+    }
+
     @PutMapping("/memos/{id}")
     public Long updateMemo(@PathVariable Long id, @RequestBody MemoRequestDto requestDto) {
         return memoService.updateMemo(id, requestDto);
